@@ -1,9 +1,10 @@
+
+
 @charset "ISO-8859-1";
 /*
     DEMO STYLE
 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -16,6 +17,27 @@ p {
     font-weight: 300;
     line-height: 1.7em;
     color: #999;
+}
+
+#sidebar{
+	    background: #8E0E00 !important;
+    background: -webkit-linear-gradient(to bottom, #1F1C18, #8E0E00) !important;
+    background: linear-gradient(to bottom, #1F1C18, #8E0E00) !important;
+    text-color: white;
+}
+.sidebar-header{
+	background: #BA8B02 !important;
+    background: -webkit-linear-gradient(to right, #181818, #BA8B02) !important;
+    background: linear-gradient(to right, #181818, #BA8B02) !important;
+    
+}
+ul a{
+	color: white;
+	border-radius:25px;           
+}
+svg{
+	margin-right:10px;
+}
 }
 
 a, a:hover, a:focus {
@@ -50,11 +72,13 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+
+
 .wrapper {
     display: flex;
     width: 100%;
     align-items: stretch;
-    perspective: 1500px;
+   
 }
 
 
@@ -67,10 +91,13 @@ a, a:hover, a:focus {
     transform-origin: bottom left;
 }
 
+
 #sidebar.active {
     margin-left: -250px;
     transform: rotateY(100deg);
 }
+
+
 
 #sidebar .sidebar-header {
     padding: 20px;
@@ -103,6 +130,8 @@ a, a:hover, a:focus {
 }
 
 
+
+
 a[data-toggle="collapse"] {
     position: relative;
 }
@@ -124,6 +153,9 @@ ul ul a {
 ul.CTAs {
     padding: 20px;
 }
+
+
+
 
 ul.CTAs a {
     text-align: center;

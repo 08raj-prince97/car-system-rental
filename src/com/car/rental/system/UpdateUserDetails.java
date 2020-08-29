@@ -22,6 +22,8 @@ public class UpdateUserDetails extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			HttpSession session=request.getSession();
 			
+			System.out.println("update1");
+			
 			String password=request.getParameter("password1").toString();
 			String name=request.getParameter("name").toString();
 			double mobile=Double.parseDouble(request.getParameter("mobile"));
@@ -32,13 +34,19 @@ public class UpdateUserDetails extends HttpServlet {
 			String address=request.getParameter("address").toString();
 			String type="user";
 			
+			System.out.println("update2");
+
+			
 			PrintWriter out=response.getWriter();
 			String url ="jdbc:mysql://localhost:3306/car_rental_system";
 			String u ="root";
 			String p ="";
-			String sql ="UPDATE userdetails SET name=?,mobile=?,city=?,pincode=?,state=?,address=?,type=? WHERE email=? AND password=PASSWORD(?)";
+			String sql ="UPDATE userdetails SET name=?,mobile=?,city=?,pincode=?,state=?,address=?,type=?,password=PASSWORD(?) WHERE email=?";
 			
 				try {
+					
+					System.out.println("update3");
+
 
 					Class.forName("com.mysql.jdbc.Driver");
 					Connection con = (Connection) DriverManager.getConnection(url,u,p);
@@ -49,13 +57,17 @@ public class UpdateUserDetails extends HttpServlet {
 					st.setDouble(4, pincode);
 					st.setString(5, state);
 					st.setString(6, address);
-					st.setString(7,email);
+					st.setString(9,email);
 					st.setString(8, password);
-					st.setString(9, type);
-					 st.execute();
+					st.setString(7, type);
+					
+					st.execute();
 					con.close();
 					
-					response.sendRedirect("usermainpage.jsp");
+					System.out.println("update4");
+
+					
+					response.sendRedirect("index.jsp");
 				
 					
 				}catch(Exception e) {

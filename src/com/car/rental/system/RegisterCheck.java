@@ -14,6 +14,7 @@ public class RegisterCheck {
 	
 	public boolean check(String email) {
 		try {
+			System.out.println("welcome tp testing");
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = (Connection) DriverManager.getConnection(url,uname,pass);
 			PreparedStatement st = con.prepareStatement(sql);

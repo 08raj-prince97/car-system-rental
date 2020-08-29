@@ -30,15 +30,14 @@ public class UserMyAccountDao {
 			     HashMap<String, String> hmap = new HashMap<String, String>();
 
 			      /*Adding elements to HashMap*/
-			      hmap.put("name", rs.getString(1));
-			      hmap.put("mobile", rs.getString(2));
-			      hmap.put("email", rs.getString(3));
-			      hmap.put("city", rs.getString(5));
-			      hmap.put("pincode", rs.getString(6));
-			      hmap.put("state", rs.getString(7));
-			      hmap.put("address", rs.getString(8));
+			      hmap.put("name", rs.getString(2));
+			      hmap.put("mobile", rs.getString(3));
+			      hmap.put("email", rs.getString(4));
+			      hmap.put("city", rs.getString(6));
+			      hmap.put("pincode", rs.getString(7));
+			      hmap.put("state", rs.getString(8));
+			      hmap.put("address", rs.getString(9));
 			      al.add(hmap);
-			  	
 			}
 			
 			return al;

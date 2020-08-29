@@ -20,15 +20,14 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/EmailRegister")
 public class EmailRegister extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email=request.getParameter("email").toString();
-		
+	
+		String email=request.getParameter("email").toString();		
 		PasswordGeneration code=new PasswordGeneration();
 		String password=code.generatePassword();
 		HttpSession session=request.getSession();
-
 		
-		String to=email;  
-	    String subject="OTP Verification";  
+		String to=email; 
+	    String subject="Password Generation";
 	    String msg= "your password is:  "+password;	
 		
 		PrintWriter out=response.getWriter();
@@ -45,14 +44,23 @@ public class EmailRegister extends HttpServlet {
 			 rd.forward(request, response);
 		 }else {
 			 try {	
-				 	Mailer.send(to, subject, msg);	
+					System.out.println("EmailRegister1");
+
+				 	Mailer.send(to, subject, msg);
+					System.out.println("EmailRegister2");
+
 					Class.forName("com.mysql.jdbc.Driver");
+					System.out.println("EmailRegister3");
+
 					Connection con = (Connection) DriverManager.getConnection(url,u,p);
 					PreparedStatement st = con.prepareStatement(sql);
+					System.out.println("EmailRegister4");
 					st.setString(1, email);
 					st.setString(2, password);
 					st.execute();
 					con.close();	  
+					
+
 					request.setAttribute("success1","You have registered successfully");
 					request.setAttribute("success2","Your password has been sent successfully to your email");
 					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

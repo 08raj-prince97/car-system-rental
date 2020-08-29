@@ -18,47 +18,45 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/UpdateUserDetails1")
 public class UpdateUserDetails1 extends HttpServlet {
-		
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			HttpSession session=request.getSession();
-			
-			String name=request.getParameter("name").toString();
-			double mobile=Double.parseDouble(request.getParameter("mobile"));
-			String email=session.getAttribute("email").toString();
-			String city=request.getParameter("city").toString();
-			double pincode=Double.parseDouble(request.getParameter("pincode"));
-			String state=request.getParameter("state").toString();
-			String address=request.getParameter("address").toString();
-			
-			PrintWriter out=response.getWriter();
-			String url ="jdbc:mysql://localhost:3306/car_rental_system";
-			String u ="root";
-			String p ="";
-			String sql ="UPDATE userdetails SET name=?,mobile=?,city=?,pincode=?,state=?,address=? WHERE email=?";
-			
-				try {
 
-					Class.forName("com.mysql.jdbc.Driver");
-					Connection con = (Connection) DriverManager.getConnection(url,u,p);
-					PreparedStatement st = con.prepareStatement(sql);
-					st.setString(1, name);
-					st.setDouble(2, mobile);
-					st.setString(3, city);
-					st.setDouble(4, pincode);
-					st.setString(5, state);
-					st.setString(6, address);
-					st.setString(7,email);
-					 st.execute();
-					con.close();
-					
-					response.sendRedirect("usermainpage.jsp");
-				
-					
-				}catch(Exception e) {
-				e.printStackTrace();
-				}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 
-			}
+		String name = request.getParameter("name").toString();
+		double mobile = Double.parseDouble(request.getParameter("mobile"));
+		String city = request.getParameter("city").toString();
+		double pincode = Double.parseDouble(request.getParameter("pincode"));
+		String state = request.getParameter("state").toString();
+		String address = request.getParameter("address").toString();
+		String id = session.getAttribute("id").toString();
+
+		PrintWriter out = response.getWriter();
+		String url = "jdbc:mysql://localhost:3306/car_rental_system";
+		String u = "root";
+		String p = "";
+		String sql = "UPDATE userdetails SET name=?,mobile=?,city=?,pincode=?,state=?,address=? WHERE id=?";
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = (Connection) DriverManager.getConnection(url, u, p);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, name);
+			st.setDouble(2, mobile);
+			st.setString(3, city);
+			st.setDouble(4, pincode);
+			st.setString(5, state);
+			st.setString(6, address);
+			st.setString(7, id);
+			st.execute();
+			con.close();
+
+			response.sendRedirect("UserMyAccount");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-
-
+}

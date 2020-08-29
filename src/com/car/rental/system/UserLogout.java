@@ -13,13 +13,10 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/UserLogout")
 public class UserLogout extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-
-		session.removeAttribute("datas");
 		session.removeAttribute("email");
 		session.invalidate();
-		System.out.print("removed1");
 		response.sendRedirect("index.jsp");
 	}
 

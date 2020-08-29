@@ -27,7 +27,7 @@ public class UserLogin extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		String email=request.getParameter("email").toString();
 		String password=request.getParameter("pass").toString();
-//		ArrayList<String> arr=n
+
 		UserLoginDao dao=new UserLoginDao();
 		if(dao.check(email, password).get(1) == "error") {
 			session.setAttribute("email", email);
@@ -48,8 +48,8 @@ public class UserLogin extends HttpServlet {
 			session.setAttribute("name", dao.check(email, password).get(1));
 			session.setAttribute("email", email);
 			session.setAttribute("type", dao.check(email, password).get(0));
-			System.out.println("type"+dao.check(email, password).get(0));
-			System.out.println("name"+dao.check(email, password).get(1));
+			session.setAttribute("id", dao.check(email, password).get(2));
+			
 			response.sendRedirect("index.jsp");
 		}
 	}

@@ -18,19 +18,21 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/UserMyAccount")
 public class UserMyAccount extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		PrintWriter out = response.getWriter();
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
+		
 		String email = session.getAttribute("email").toString();
 		UserMyAccountDao dao = new UserMyAccountDao();
 
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		ArrayList al = new ArrayList(dao.userDetails(email));
 
-			session.setAttribute("datas", al);
-			session.setAttribute("uname", email);
-			response.sendRedirect("usermyaccount.jsp");
-		}
+		session.setAttribute("datas", al);
+		session.setAttribute("uname", email);
+		response.sendRedirect("userMyAccount.jsp");
+	}
 
 }

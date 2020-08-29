@@ -1,70 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+<link rel="stylesheet" href="index.css">
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+	integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
 	crossorigin="anonymous"></script>
 
 
+<title>Documentt</title>
 </head>
 <body>
 
-	<%--BOOK CAR --%>
-	
- 	<%
-		if (session.getAttribute("email") == null) {
-	%>
-	<%@ include file="indexnavbar.html"%>
-	<%
-		} else {
-	%>
-	<%@ include file="usernavbar.html"%>
-	<%
-		}
-	%>
+	<%@include file="indexLayout1.jsp"%>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
+	<form method="post" action="SearchCar" onSubmit="abc()" id="form">
+		<label for="startdatetimepicker">Start time</label> <input
+			id="startdatetimepicker" type="text" required name="startdate">
+		<label for="enddatetimepicker">End time</label> <input
+			id="enddatetimepicker" type="text" required name="enddate">
 
-	<div class="container  mt-4" id="bookCarPage">
-		<h3 class="" style="text-align: center">Book Your Car</h3>
-		<form action="Login" method="post">
-			<div class="form-group">
-				<label for="exampleInputEmail1">Pick Up Date*</label> <input
-					type="date" class="form-control" id="exampleInputEmail1"
-					placeholder="Enter Pick Up Date" required name="uname">
-			</div>
+		<button>submit</button>
 
-			<div class="form-group">
-				<label for="exampleInputPassword1">Drop Off Date*</label> <input
-					type="date" class="form-control" id="exampleInputPassword1"
-					placeholder="Enter Drop Off Date" required name="pass">
-			</div>
-
-			<div class="form-group">
-				<button type="button" class="btn btn-dark">Search Car</button>
-			</div>
-		</form>
+	</form>
 
 	</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#startdatetimepicker').datetimepicker();
+			$("#startdatetimepicker").attr("minDate", new Date())
+		});
+		$(document).ready(function() {
+			$('#enddatetimepicker').datetimepicker();
+		});
+		$("#startdatetimepicker").change(
+				function() {
+					var startTime = new Date(document
+							.getElementById("startdatetimepicker").value)
+					console.log(startTime, "start time")
+					$("#enddatetimepicker").datepicker('option', {
+						minDate : startDate
+					});
+
+				})
+
+		function abc() {
+
+			var startTime = new Date(document
+					.getElementById("startdatetimepicker").value)
+			var endTime = new Date(
+					document.getElementById("enddatetimepicker").value)
+
+			console.log("start time", startTime.getTime())
+			console.log("end time", endTime.getTime())
+			document.getElementById("startdatetimepicker").value = startTime
+					.getTime();
+			document.getElementById("enddatetimepicker").value = endTime
+					.getTime();
+			return true;
+
+		}
+	</script>
+
+
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+		
+	
 
 </body>
 </html>
